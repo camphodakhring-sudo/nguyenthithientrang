@@ -1,0 +1,95 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #0a0a0a 0%, #000 100%);
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+  perspective: 1000px;
+  touch-action: none;
+}
+
+.sparkle-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sparkle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow:
+    0 -1.5px 0 0 white,
+    0  1.5px 0 0 white,
+    -1.5px 0 0 0 white,
+    1.5px 0 0 0 white;
+  opacity: 0;
+  animation: sparkleBlink 4s infinite ease-in-out;
+}
+
+@keyframes sparkleBlink {
+  0%, 100% { opacity: 0.2; transform: scale(0.5); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+
+.scene {
+  width: 100vw;
+  height: 100vh;
+  transform-style: preserve-3d;
+  position: relative;
+  transition: transform 0.1s linear;
+  z-index: 1;
+}
+
+.falling-text {
+  position: absolute;
+  top: -10vh;
+  font-size: 4vmin;
+  color: #0ff;
+  white-space: nowrap;
+  animation: fall 8s linear forwards, hueShift 8s linear infinite;
+  transform-style: preserve-3d;
+  filter: hue-rotate(0deg);
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+}
+
+.falling-icon {
+  position: absolute;
+  top: -10vh;
+  font-size: 3.5vmin;
+  animation: fall 8s linear forwards;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+@keyframes hueShift {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes fall {
+  0% {
+    top: -10vh;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    top: 120vh;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .falling-text { font-size: 5vmin; }
+  .falling-icon { font-size: 4vmin; }
+}
